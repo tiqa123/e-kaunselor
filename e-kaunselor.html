@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Kaunselor | A Safe Space to Feel</title>
+<style>
+:root{--navy:#20354b;--teal:#3e8581;--mint:#e8f4ef;--cream:#fbf8f2;--ink:#263746;--muted:#71808b;--rose:#f3e3df;--line:#dce7e2;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5}
+header{background:var(--navy);color:white;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-size:1.35rem;font-weight:800;letter-spacing:.3px}.brand span{color:#a9d8c8}
+header p{margin:3px 0 0;font-size:.88rem;color:#d9e6ec}
+nav{display:flex;gap:8px;flex-wrap:wrap;padding:12px 5%;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:0;background:transparent;color:var(--navy);padding:9px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+nav button.active,nav button:hover{background:var(--mint);color:#245e5b}
+main{max-width:1100px;margin:26px auto;padding:0 18px 50px}
+.view{display:none}.view.active{display:block}
+.hero{background:linear-gradient(120deg,#e3f1eb,#f7ece6);padding:30px;border-radius:22px;margin-bottom:22px}
+.eyebrow{text-transform:uppercase;letter-spacing:1.5px;font-size:.75rem;font-weight:800;color:var(--teal)}
+h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;margin:9px 0 12px;color:var(--navy)}
+h2{color:var(--navy);margin-top:0}h3{color:var(--navy);margin:0 0 8px}
+p{margin-top:0}.muted{color:var(--muted)}.small{font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:white;border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 5px 18px #20354b0a}
+.card p{color:var(--muted);font-size:.94rem}.card .emoji{font-size:1.8rem;margin-bottom:9px}
+button,.button{font:inherit;cursor:pointer}
+.primary{background:var(--teal);color:white;border:0;border-radius:10px;padding:11px 16px;font-weight:700}
+.secondary{background:var(--mint);color:#245e5b;border:1px solid #cce3d9;border-radius:10px;padding:10px 14px;font-weight:700}
+.danger{background:#fff1ee;color:#994d42;border:1px solid #f0d1ca;border-radius:10px;padding:9px 12px;font-weight:700}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ccd9d5;border-radius:10px;font:inherit;background:#fff;color:var(--ink);margin:6px 0 14px}
+textarea{min-height:130px;resize:vertical}
+label{font-weight:700;font-size:.92rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1}
+.notice{padding:13px 15px;background:#fff7e8;border:1px solid #f0dfb7;border-radius:12px;color:#705b2c;font-size:.9rem;margin:15px 0}
+.success{background:#e8f5ed;border:1px solid #cde7d7;color:#285c42;padding:12px;border-radius:10px;margin:12px 0}
+.emotion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:10px}
+.emotion{background:white;border:1px solid var(--line);border-radius:14px;padding:16px 8px;text-align:center;color:var(--ink)}
+.emotion .emoji{font-size:1.7rem;display:block;margin-bottom:6px}
+.emotion.selected{border:2px solid var(--teal);background:var(--mint)}
+.entry{border-left:4px solid #8bbcb0;padding:12px 14px;background:#f7fbf9;border-radius:0 10px 10px 0;margin:12px 0}
+.entry time{font-size:.8rem;color:var(--muted)}
+.stat{font-size:1.7rem;font-weight:800;color:var(--teal)}
+footer{text-align:center;padding:25px;background:#edf3ef;color:var(--muted);font-size:.85rem}
+.hidden{display:none!important}
+@media(max-width:600px){header{padding:16px 18px}nav{padding:8px;gap:3px}nav button{font-size:.82rem;padding:8px}main{margin:18px auto;padding:0 12px 35px}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="brand">e-<span>Kaunselor</span></div><p>A safe space to feel, reflect and seek support.</p></div>
+  <div class="small">Prototype for educational use</div>
+</header>
+<nav id="nav">
+  <button class="active" data-view="home">Dashboard</button>
+  <button data-view="heart">Anonymous Heart</button>
+  <button data-view="emotions">Emotion Explorer</button>
+  <button data-view="journal">Emotion Journal</button>
+  <button data-view="checkin">Daily Check-in</button>
+  <button data-view="profile">Anonymous Profile</button>
+  <button data-view="counsellor">Counsellor Portal</button>
+</nav>
+<main>
+<section class="view active" id="home">
+  <div class="hero">
+    <div class="eyebrow">Your feelings matter</div>
+    <h1>You don't have to carry everything alone.</h1>
+    <p>Share what is on your mind, understand your emotions and take a small step towards well-being — at your own pace.</p>
+    <div class="row"><button class="primary" onclick="showView('heart')">Share anonymously</button><button class="secondary" onclick="showView('checkin')">Check in with myself</button></div>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="emoji">💌</div><h3>Anonymous Heart</h3><p>Write a concern without entering your name.</p><button class="secondary" onclick="showView('heart')">Write a message</button></article>
+    <article class="card"><div class="emoji">🌈</div><h3>Emotion Explorer</h3><p>Find words to describe what you may be feeling.</p><button class="secondary" onclick="showView('emotions')">Explore emotions</button></article>
+    <article class="card"><div class="emoji">📔</div><h3>Emotion Journal</h3><p>Reflect privately and keep a journal on this browser.</p><button class="secondary" onclick="showView('journal')">Open journal</button></article>
+    <article class="card"><div class="emoji">🌤️</div><h3>Daily Check-in</h3><p>Pause for a moment and notice how you feel today.</p><button class="secondary" onclick="showView('checkin')">Check in</button></article>
+    <article class="card"><div class="emoji">🕊️</div><h3>Anonymous Profile</h3><p>Use a demo ID instead of displaying your name.</p><button class="secondary" onclick="showView('profile')">View profile</button></article>
+    <article class="card"><div class="emoji">🧑‍⚕️</div><h3>Counsellor Portal</h3><p>A demonstration view for reviewing sample messages.</p><button class="secondary" onclick="showView('counsellor')">Open portal</button></article>
+  </div>
+  <div class="notice"><strong>Important:</strong> This is a demonstration only. Messages are not sent to a real registered counsellor. If you are in immediate danger, contact local emergency services or a trusted person.</div>
+</section>
+
+<section class="view" id="heart">
+  <div class="hero"><div class="eyebrow">Anonymous Heart</div><h1>A place to let it out.</h1><p>You can write about what is bothering you. Avoid including your name, address, phone number or other identifying details.</p></div>
+  <div class="card">
+    <label for="messageCategory">What would you like to talk about?</label>
+    <select id="messageCategory"><option>Stress / studies</option><option>Friendship / relationships</option><option>Family</option><option>Self-confidence</option><option>Emotions / mental well-being</option><option>Other</option></select>
+    <label for="anonymousMessage">Your message</label><textarea id="anonymousMessage" placeholder="Write whatever you feel comfortable sharing..."></textarea>
+    <button class="primary" onclick="submitAnonymous()">Submit demo message</button>
+    <div id="messageFeedback" aria-live="polite"></div>
+  </div>
+  <div class="notice">Prototype limitation: this demo stores submitted messages only in this browser for the demonstration. It does not securely transmit them to a counsellor.</div>
+</section>
+
+<section class="view" id="emotions">
+  <div class="hero"><div class="eyebrow">Emotion Explorer</div><h1>What might you be feeling?</h1><p>Choose the word that feels closest to your experience. There is no right or wrong answer.</p></div>
+  <div class="emotion-grid" id="emotionOptions">
+    <button class="emotion" data-emotion="Happy"><span class="emoji">😊</span>Happy</button>
+    <button class="emotion" data-emotion="Sad"><span class="emoji">😔</span>Sad</button>
+    <button class="emotion" data-emotion="Anxious"><span class="emoji">😟</span>Anxious</button>
+    <button class="emotion" data-emotion="Angry"><span class="emoji">😠</span>Angry</button>
+    <button class="emotion" data-emotion="Overwhelmed"><span class="emoji">🥺</span>Overwhelmed</button>
+    <button class="emotion" data-emotion="Lonely"><span class="emoji">🌧️</span>Lonely</button>
+    <button class="emotion" data-emotion="Calm"><span class="emoji">😌</span>Calm</button>
+    <button class="emotion" data-emotion="Confused"><span class="emoji">😶‍🌫️</span>Confused</button>
+  </div>
+  <div class="card" style="margin-top:18px"><h2 id="emotionTitle">Choose an emotion</h2><p id="emotionText">A word for your feeling can be a first step towards understanding it.</p><button class="secondary" onclick="showView('journal')">Reflect in my journal</button></div>
+</section>
+
+<section class="view" id="journal">
+  <div class="hero"><div class="eyebrow">Emotion Journal</div><h1>Give your thoughts a little space.</h1><p>Use these prompts to reflect. Your entries are saved in this browser on this device only.</p></div>
+  <div class="card">
+    <label for="journalMood">How are you feeling?</label><select id="journalMood"><option>Not sure yet</option><option>Happy</option><option>Sad</option><option>Anxious</option><option>Angry</option><option>Overwhelmed</option><option>Lonely</option><option>Calm</option><option>Hopeful</option></select>
+    <label for="journalText">What is on your mind?</label><textarea id="journalText" placeholder="Today, I am feeling..."></textarea>
+    <button class="primary" onclick="saveJournal()">Save journal entry</button><div id="journalFeedback" aria-live="polite"></div>
+  </div>
+  <div class="card" style="margin-top:18px"><div class="row"><h2 style="margin:0">My journal history</h2><button class="danger" style="flex:0 0 auto" onclick="clearJournal()">Clear history</button></div><div id="journalHistory"></div></div>
+  <div class="notice">Do not use this prototype to store sensitive or identifying information. Browser storage is not a secure counselling record.</div>
+</section>
+
+<section class="view" id="checkin">
+  <div class="hero"><div class="eyebrow">Daily Check-in</div><h1>Pause. Breathe. Notice.</h1><p>You do not need to fix everything right now. Start by checking in with yourself.</p></div>
+  <div class="card">
+    <label for="checkinMood">How are you feeling today?</label><select id="checkinMood"><option value="😊 Happy">😊 Happy</option><option value="😌 Calm">😌 Calm</option><option value="😔 Sad">😔 Sad</option><option value="😟 Anxious">😟 Anxious</option><option value="🥺 Overwhelmed">🥺 Overwhelmed</option><option value="😠 Angry">😠 Angry</option><option value="🌧️ Lonely">🌧️ Lonely</option><option value="😶‍🌫️ Confused">😶‍🌫️ Confused</option></select>
+    <label for="checkinNote">One thing I need today (optional)</label><textarea id="checkinNote" style="min-height:85px" placeholder="For example: rest, encouragement, a short walk..."></textarea>
+    <button class="primary" onclick="saveCheckin()">Save my check-in</button><div id="checkinFeedback" aria-live="polite"></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h2>Gentle reminder</h2><p>Try breathing in slowly for four counts, then breathing out gently for six counts. Repeat only if it feels comfortable. You deserve care, even on difficult days.</p></div>
+</section>
+
+<section class="view" id="profile">
+  <div class="hero"><div class="eyebrow">Anonymous Profile</div><h1>Your demo identity</h1><p>This profile uses a generated demo ID instead of asking for your name.</p></div>
+  <div class="card"><p class="muted">YOUR ANONYMOUS DEMO ID</p><div class="stat" id="demoId">EK-DEMO-2048</div><p>This is only a sample ID. It does not verify identity or provide a secure account.</p><button class="primary" onclick="newDemoId()">Generate new demo ID</button></div>
+</section>
+
+<section class="view" id="counsellor">
+  <div class="hero"><div class="eyebrow">Counsellor Portal · Demo</div><h1>Message review dashboard</h1><p>This screen demonstrates how a counsellor portal might look. The sample below is fictional.</p></div>
+  <div class="grid">
+    <div class="card"><p class="muted">DEMO MESSAGES</p><div class="stat" id="messageCount">1</div></div>
+    <div class="card"><p class="muted">WAITING FOR REVIEW</p><div class="stat" id="pendingCount">1</div></div>
+  </div>
+  <div id="counsellorMessages" style="margin-top:18px"></div>
+  <div class="notice"><strong>Privacy and safety:</strong> This portal has no counsellor authentication, access controls, secure database or real message delivery. Do not use it for actual student disclosures.</div>
+</section>
+</main>
+<footer>e-Kaunselor · Educational prototype · A supportive space to reflect, not a replacement for professional care.</footer>
+<script>
+const emotionDescriptions={
+  Happy:"Happiness may come from connection, achievement, relief or small moments. You can pause and notice what contributed to this feeling.",
+  Sad:"Sadness can be a response to loss, disappointment or stress. You do not have to rush yourself out of it; consider what support would feel helpful.",
+  Anxious:"Anxiety can make the future feel uncertain. Try naming one thing you know for sure and one small step you can take now.",
+  Angry:"Anger can signal that something feels unfair, hurtful or beyond your limits. Give yourself time before deciding how to respond.",
+  Overwhelmed:"Feeling overwhelmed can happen when too many demands arrive at once. Consider choosing just one small next step, or asking someone for help.",
+  Lonely:"Loneliness can happen even when other people are around. A small connection with a trusted person may help, when you feel ready.",
+  Calm:"Calm can offer a moment to rest and recharge. Notice what is helping you feel steady.",
+  Confused:"It is okay not to have all the answers. You might write down what you know, what you do not know, and what you want to understand."
+};
+let selectedEmotion="";
+document.querySelectorAll("nav button").forEach(btn=>btn.addEventListener("click",()=>showView(btn.dataset.view)));
+function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="journal")renderJournal();if(id==="counsellor")renderCounsellor();window.scrollTo({top:0,behavior:"smooth"});}
+function safeGet(key,fallback){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch(e){return fallback}}
+function safeSet(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch(e){return false}}
+function submitAnonymous(){
+ const text=document.getElementById("anonymousMessage").value.trim(),category=document.getElementById("messageCategory").value;
+ const feedback=document.getElementById("messageFeedback");
+ if(!text){feedback.innerHTML='<p class="notice">Please write a message first.</p>';return}
+ const messages=safeGet("ekMessages",[]);
+ messages.unshift({id:"MSG-"+String(Date.now()).slice(-6),category,text,created:new Date().toLocaleString(),status:"Waiting for review"});
+ if(!safeSet("ekMessages",messages)){feedback.innerHTML='<p class="notice">Could not save in this browser. Please try again.</p>';return}
+ document.getElementById("anonymousMessage").value="";
+ feedback.innerHTML='<div class="success">Your demo message has been saved in this browser. It has not been sent to a real counsellor.</div>';
+}
+document.querySelectorAll(".emotion").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".emotion").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");
+ selectedEmotion=btn.dataset.emotion;document.getElementById("emotionTitle").textContent=selectedEmotion;document.getElementById("emotionText").textContent=emotionDescriptions[selectedEmotion];
+ document.getElementById("journalMood").value=selectedEmotion;
+}));
+function saveJournal(){
+ const mood=document.getElementById("journalMood").value,text=document.getElementById("journalText").value.trim(),feedback=document.getElementById("journalFeedback");
+ if(!text){feedback.innerHTML='<p class="notice">Write a short reflection before saving.</p>';return}
+ const entries=safeGet("ekJournal",[]);entries.unshift({mood,text,date:new Date().toLocaleString()});
+ if(!safeSet("ekJournal",entries)){feedback.innerHTML='<p class="notice">Could not save. Browser storage may be unavailable.</p>';return}
+ document.getElementById("journalText").value="";feedback.innerHTML='<div class="success">Journal entry saved on this browser.</div>';renderJournal();
+}
+function renderJournal(){
+ const entries=safeGet("ekJournal",[]),container=document.getElementById("journalHistory");
+ if(!entries.length){container.innerHTML='<p class="muted">No entries yet. Your saved reflections will appear here.</p>';return}
+ container.innerHTML=entries.map(e=>'<div class="entry"><strong>'+escapeHtml(e.mood)+'</strong><p>'+escapeHtml(e.text)+'</p><time>'+escapeHtml(e.date)+'</time></div>').join("");
+}
+function clearJournal(){if(confirm("Clear all journal entries saved in this browser?")){localStorage.removeItem("ekJournal");renderJournal();document.getElementById("journalFeedback").innerHTML='<div class="success">Journal history cleared.</div>';}}
+function saveCheckin(){
+ const mood=document.getElementById("checkinMood").value,note=document.getElementById("checkinNote").value.trim(),items=safeGet("ekCheckins",[]);
+ items.unshift({mood,note,date:new Date().toLocaleString()});
+ const ok=safeSet("ekCheckins",items);
+ document.getElementById("checkinFeedback").innerHTML=ok?'<div class="success">Check-in saved on this browser. Thank you for taking a moment for yourself.</div>':'<p class="notice">Could not save this check-in.</p>';
+}
+function newDemoId(){document.getElementById("demoId").textContent="EK-DEMO-"+Math.floor(1000+Math.random()*9000);}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderCounsellor(){
+ const realMessages=safeGet("ekMessages",[]);
+ const samples=[{id:"MSG-001",category:"Stress / studies",text:"I have been feeling stressed about my studies and I am not sure how to manage everything.",created:"Sample message · fictional",status:"Waiting for review",sample:true},...realMessages];
+ document.getElementById("messageCount").textContent=samples.length;
+ document.getElementById("pendingCount").textContent=samples.filter(m=>m.status==="Waiting for review").length;
+ document.getElementById("counsellorMessages").innerHTML=samples.map(m=>'<div class="card" style="margin-bottom:12px"><div class="row"><div><p class="muted small">'+escapeHtml(m.id)+' · '+escapeHtml(m.category)+'</p><h3>'+escapeHtml(m.status)+'</h3></div><span class="small muted">'+escapeHtml(m.created)+'</span></div><p>'+escapeHtml(m.text)+'</p><label for="reply-'+escapeHtml(m.id)+'">Demo response preview</label><textarea id="reply-'+escapeHtml(m.id)+'" placeholder="Type a sample supportive response..."></textarea><button class="secondary" onclick="previewReply(\''+escapeHtml(m.id)+'\')">Preview response</button><div id="reply-feedback-'+escapeHtml(m.id)+'"></div></div>').join("");
+}
+function previewReply(id){const field=document.getElementById("reply-"+id),target=document.getElementById("reply-feedback-"+id),value=field.value.trim();target.innerHTML=value?'<div class="success"><strong>Demo preview only:</strong><p>'+escapeHtml(value)+'</p><p class="small">This response has not been sent to anyone.</p></div>':'<p class="notice">Write a response first.</p>';}
+renderJournal();
+</script>
+</body>
+</html>
